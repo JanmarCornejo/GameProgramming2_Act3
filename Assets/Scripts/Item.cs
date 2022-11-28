@@ -6,15 +6,19 @@ namespace GP2.Inventory
     {
         protected Item(ItemBag itemBag)
         {
+            Name = itemBag.ItemName;
+            Type = itemBag.Type;
+            Kind = itemBag.Kind;
+            Description = itemBag.Description;
         }
 
-        public abstract string Name { get; protected set; }
-        public abstract ItemType Type { get; protected set; }
-        public abstract ItemKind Kind { get; protected set; }
-        public abstract int Quantity { get; protected set; }
-        public abstract string Description { get; protected set; }
-        public abstract bool IsStackable { get; protected set; }
-        public abstract bool IsClickable { get; protected set; }
+        public string Name { get; protected set; }
+        public ItemType Type { get; protected set; }
+        public ItemKind Kind { get; protected set; }
+        public int Quantity { get; protected set; }
+        public string Description { get; protected set; }
+        public bool IsStackable { get; protected set; }
+        public bool IsClickable { get; protected set; }
         public abstract void StackItem(Item item);
         public abstract void ShowItemInfo();
     }
@@ -31,7 +35,7 @@ namespace GP2.Inventory
         void StackItem(Item item);
         void ShowItemInfo();
     }
-    
+
     public enum ItemKind
     {
         Unassigned,
@@ -40,17 +44,18 @@ namespace GP2.Inventory
         Consumable,
     }
 
-    
+
     public enum ItemType
     {
         Unassigned = 0,
+
         //Equipment
         Sword = 1,
         Breastplate,
-        
+
         //Misc
         Stone = 300,
-        
+
         //Consumables
         HealingPotion = 600,
         ManaPotion,

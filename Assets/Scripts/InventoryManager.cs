@@ -81,7 +81,9 @@ namespace GP2.Inventory
                           $"{nameof(item.Type)}:{item.Type} " +
                           $"{nameof(item.Kind)}:{item.Kind} " +
                           $"{nameof(item.Quantity)}:{item.Quantity} " +
-                          $"{nameof(item.Description)}:{item.Description}");
+                          $"{nameof(item.Description)}:{item.Description} " +
+                          $"{nameof(item.IsStackable)}:{item.IsStackable} " + 
+                          $"{nameof(item.IsClickable)}:{item.IsClickable} ");
             }
         }
         
