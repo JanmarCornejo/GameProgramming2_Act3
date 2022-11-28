@@ -8,11 +8,15 @@ namespace GP2.Inventory
 {
     public class InventoryManager : MonoBehaviour
     {
-        private List<Item> _itemList = new List<Item>();
-        [SerializeField] private string ItemInfoPath = "Items";
+        //To store item database scriptable objects
+        private string ItemInfoPath = "Items";
         private Dictionary<ItemType, ItemBag> _itemsInfoDictionary = new Dictionary<ItemType, ItemBag>();
         
-        [SerializeField] private ItemType[] ItemDrops;
+        //To record items on runtime
+        private List<Item> _itemList = new List<Item>();
+        
+        //Sample Item drops 
+        [SerializeField] private ItemType[] _itemDrops;
         
         private void Awake()
         {
@@ -39,12 +43,23 @@ namespace GP2.Inventory
             }
         }
 
+        /// <summary>
+        /// Finding consumable items with same type
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
         private Item FindStackableItem(ItemType type)
         {
             return _itemList.Where(item => item.Kind == ItemKind.Consumable).
                 FirstOrDefault(item => item.Type == type);
         }
 
+        /// <summary>
+        /// Creating new items based on the item type
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         private Item CheckItemKind(ItemType type)
         {
             ItemBag itemBag = GetItemInfo(type);
@@ -64,16 +79,16 @@ namespace GP2.Inventory
             }
             return null;
         }
-
+        
         private ItemBag GetItemInfo(ItemType type)
         {
             return _itemsInfoDictionary[type];
         }
         
-        //Debugging functions
+        //Below are debugging functions
         private void DebugInitialSampleItems()
         {
-            foreach (var type in ItemDrops)
+            foreach (var type in _itemDrops)
             {
                 var item = CheckItemKind(type);
                 _itemList.Add(item);

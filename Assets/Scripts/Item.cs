@@ -19,7 +19,16 @@ namespace GP2.Inventory
         public string Description { get; protected set; }
         public bool IsStackable { get; protected set; }
         public bool IsClickable { get; protected set; }
-        public abstract void StackItem(Item item);
+        
+        /// <summary>
+        /// To implement stacking quantity of item
+        /// </summary>
+        /// <param name="itemToGive"></param>
+        public abstract void StackItem(Item itemToGive);
+        
+        /// <summary>
+        /// To implement display item information e.g. Name & Description 
+        /// </summary>
         public abstract void ShowItemInfo();
     }
 
@@ -32,10 +41,10 @@ namespace GP2.Inventory
         string Description { get; }
         bool IsStackable { get; }
         bool IsClickable { get; }
-        void StackItem(Item item);
+        void StackItem(Item itemToGive);
         void ShowItemInfo();
     }
-
+    
     public enum ItemKind
     {
         Unassigned,
@@ -43,7 +52,6 @@ namespace GP2.Inventory
         Miscellaneous,
         Consumable,
     }
-
 
     public enum ItemType
     {

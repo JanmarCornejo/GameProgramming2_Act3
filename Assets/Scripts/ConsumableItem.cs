@@ -12,10 +12,10 @@ namespace GP2.Inventory
             Quantity = itemBag.Quantity;
         }
         
-        public override void StackItem(Item item)
+        public override void StackItem(Item itemToGive)
         {
             Debug.Log($"{Name} previous quantity: {Quantity}");
-            Quantity += item.Quantity;
+            Quantity += itemToGive.Quantity;
             Debug.Log($"{Name} new quantity: {Quantity}");
         }
 

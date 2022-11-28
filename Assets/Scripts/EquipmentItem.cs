@@ -12,7 +12,7 @@ namespace GP2.Inventory
             Quantity = 1;
         }
 
-        public override void StackItem(Item item)
+        public override void StackItem(Item itemToGive)
         {
             if (!IsStackable)
             {

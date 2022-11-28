@@ -152,8 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9654c3016883d9f46a772a2a419c6433, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ItemInfoPath: Items
-  ItemDrops: 010000002c01000058020000
+  _itemDrops: 010000002c01000058020000
 --- !u!4 &1111434140
 Transform:
   m_ObjectHideFlags: 0
