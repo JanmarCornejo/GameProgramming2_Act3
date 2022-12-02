@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
 
-
+    
 
     public Image image;
     [HideInInspector] public Transform parentAfterDrag;
