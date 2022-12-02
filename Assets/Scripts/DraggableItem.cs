@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
@@ -12,6 +13,7 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     private int _pointClicks = 0;
     
     [SerializeField] private Image _image;
+    [SerializeField] private TextMeshProUGUI _quantityUI;
     private InventorySlot _parentAfterDrag;
     //[SerializeField] private Transform _parentAfterDrag;
     public Transform GetParent() => _parentAfterDrag.transform;
@@ -38,19 +40,37 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         this.transform.SetParent(slot.transform,false);
 
         _parentAfterDrag = this.GetComponentInParent<InventorySlot>();
-        
-        if (_item.Kind == ItemKind.Consumable)
-        {
-            //TODO update quantity UI
-        }
+        _quantityUI = this.GetComponentInChildren<TextMeshProUGUI>();
+        OnUpdateQuantityUI(_item);
 
         _image = this.GetComponent<Image>();
         _image.sprite = _item.Sprite;
+
+        _item.OnUpdateQuantity += OnUpdateQuantityUI;
+        _item.OnRemoveItem += OnRemoveItem;
     }
-    
+
+    public void DropItem()
+    {
+        _item.InvokeOnRemoveItem();
+    }
+
+    private void OnRemoveItem(Item item)
+    {
+        _item.OnUpdateQuantity -= OnUpdateQuantityUI;
+        _item.OnRemoveItem -= OnRemoveItem;
+        Destroy(this.gameObject);
+    }
+
+    private void OnUpdateQuantityUI(Item item)
+    {
+        _quantityUI.text = item.Quantity.ToString();
+    }
+
     public void OnBeginDrag(PointerEventData eventData)
     {
-        _parentAfterDrag.transform.parent = transform.parent;
+        // _parentAfterDrag.transform.parent = transform.parent;
+        _parentAfterDrag.transform.SetParent(transform.parent, false);
         transform.SetParent(transform.root);
         // transform.SetAsLastSibling();
         _image.raycastTarget = false;

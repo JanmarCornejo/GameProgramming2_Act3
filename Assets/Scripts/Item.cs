@@ -1,8 +1,12 @@
+using System;
 using UnityEngine;
 
 
 public abstract class Item : IItemHandler
 {
+    public event Action<Item> OnRemoveItem;
+    public event Action<Item> OnUpdateQuantity; 
+
     protected Item(ItemBag itemBag)
     {
         Name = itemBag.ItemName;
@@ -35,6 +39,16 @@ public abstract class Item : IItemHandler
     /// To implement display item information e.g. Name & Description 
     /// </summary>
     public abstract void InteractItem();
+    
+    public void InvokeOnRemoveItem()
+    {
+        OnRemoveItem?.Invoke(this);
+    }
+
+    protected void InvokeOnUpdateQuantity()
+    {
+        OnUpdateQuantity?.Invoke(this);
+    }
 }
 
 public interface IItemHandler

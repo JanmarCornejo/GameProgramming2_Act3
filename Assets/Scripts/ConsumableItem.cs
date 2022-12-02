@@ -15,6 +15,7 @@ public class ConsumableItem : Item
         Debug.Log($"{nameof(Name)} : {Name} previous Quantity: {Quantity}");
         Quantity += itemToGive.Quantity;
         Debug.Log($"{nameof(Name)} : new quantity: {Quantity}");
+        InvokeOnUpdateQuantity();
     }
 
     public override void InteractItem()
@@ -23,7 +24,8 @@ public class ConsumableItem : Item
         Quantity -= 1;
         Debug.Log($"{nameof(Name)} : {Name} consume 1 {nameof(Quantity)}");
         Debug.Log($"{nameof(Name)} : {Name} new {nameof(Quantity)} : {Quantity}");
-        //TODO update quantity UI
-        //TODO if 0 quantity, destroy item
+        InvokeOnUpdateQuantity();
+        if(Quantity <= 0)
+            InvokeOnRemoveItem();
     }
 }

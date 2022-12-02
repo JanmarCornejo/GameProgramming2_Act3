@@ -17,10 +17,8 @@ public class InventoryManager : MonoBehaviour
     private List<Item> _itemList = new List<Item>();
 
     [SerializeField] private int _itemSlots = 16;
-
-    //Sample Item drops 
-    [SerializeField] private ItemType[] _itemDrops;
-
+    
+    [SerializeField] private DropConfirmationPanel _dropPanelPrefab;
     [SerializeField] private InventoryGrid _grid;
     [SerializeField] private Canvas _sceneCanvas;
 
@@ -43,17 +41,7 @@ public class InventoryManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        DebugInitialSampleItems();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        //Debugging
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            DebugStackItem();
-        }
+        //DebugInitialSampleItems();
     }
 
     /// <summary>
@@ -72,7 +60,7 @@ public class InventoryManager : MonoBehaviour
     /// <param name="type"></param>
     /// <returns></returns>
     /// <exception cref="Exception"></exception>
-    private Item CreateItem(ItemType type)
+    public Item CreateItem(ItemType type)
     {
         ItemBag itemBag = GetItemInfo(type);
         switch (itemBag.Kind)
@@ -89,7 +77,6 @@ public class InventoryManager : MonoBehaviour
             case ItemKind.Unassigned:
                 throw new Exception($"{type} is still unassigned");
         }
-
         return null;
     }
 
@@ -107,32 +94,36 @@ public class InventoryManager : MonoBehaviour
         }
 
         _itemList.Add(item);
+        _itemSlots--;
+        item.OnRemoveItem += RemoveItem;
         return true;
     }
 
     private void RemoveItem(Item item)
     {
-        //TODO action event
         _itemList.Remove(item);
-        _itemSlots--;
+        _itemSlots++;
     }
+
+    public DropConfirmationPanel CreateDropConfirmPanel() =>
+        Instantiate(_dropPanelPrefab, _sceneCanvas.transform, false);
 
     //Below are debugging functions
     private void DebugInitialSampleItems()
     {
-        foreach (var type in _itemDrops)
-        {
-            var item = CreateItem(type);
-            //TODO check if inventory is full
-            _itemList.Add(item);
-            Debug.Log($"{nameof(item.Name)}:{item.Name} " +
-                      $"{nameof(item.Type)}:{item.Type} " +
-                      $"{nameof(item.Kind)}:{item.Kind} " +
-                      $"{nameof(item.Quantity)}:{item.Quantity} " +
-                      $"{nameof(item.Description)}:{item.Description} " +
-                      $"{nameof(item.IsStackable)}:{item.IsStackable} " +
-                      $"{nameof(item.IsClickable)}:{item.IsClickable} ");
-        }
+        // foreach (var type in _itemDrops)
+        // {
+        //     var item = CreateItem(type);
+        //     //TODO check if inventory is full
+        //     _itemList.Add(item);
+        //     //Debug.Log($"{nameof(item.Name)}:{item.Name} " +
+        //               // $"{nameof(item.Type)}:{item.Type} " +
+        //               // $"{nameof(item.Kind)}:{item.Kind} " +
+        //               // $"{nameof(item.Quantity)}:{item.Quantity} " +
+        //               // $"{nameof(item.Description)}:{item.Description} " +
+        //               // $"{nameof(item.IsStackable)}:{item.IsStackable} " +
+        //               // $"{nameof(item.IsClickable)}:{item.IsClickable} ");
+        // }
     }
 
     private void DebugStackItem()
