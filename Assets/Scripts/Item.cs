@@ -1,71 +1,75 @@
 using UnityEngine;
 
-namespace GP2.Inventory
+
+public abstract class Item : IItemHandler
 {
-    public abstract class Item : IItemHandler
+    protected Item(ItemBag itemBag)
     {
-        protected Item(ItemBag itemBag)
-        {
-            Name = itemBag.ItemName;
-            Type = itemBag.Type;
-            Kind = itemBag.Kind;
-            Description = itemBag.Description;
-        }
-
-        public string Name { get; protected set; }
-        public ItemType Type { get; protected set; }
-        public ItemKind Kind { get; protected set; }
-        public int Quantity { get; protected set; }
-        public string Description { get; protected set; }
-        public bool IsStackable { get; protected set; }
-        public bool IsClickable { get; protected set; }
-        
-        /// <summary>
-        /// To implement stacking quantity of item
-        /// </summary>
-        /// <param name="itemToGive"></param>
-        public abstract void StackItem(Item itemToGive);
-        
-        /// <summary>
-        /// To implement display item information e.g. Name & Description 
-        /// </summary>
-        public abstract void ShowItemInfo();
+        Name = itemBag.ItemName;
+        Type = itemBag.Type;
+        Kind = itemBag.Kind;
+        Description = itemBag.Description;
+        Quantity = itemBag.Quantity;
+        Sprite = itemBag.Sprite;
+        var dragItemUI = itemBag.DraggableItem;
+        bool addedToList = InventoryManager.Instance.AddItemToList(this);
+        dragItemUI.Initialize(this, addedToList);
     }
 
-    public interface IItemHandler
-    {
-        string Name { get; }
-        ItemType Type { get; }
-        ItemKind Kind { get; }
-        int Quantity { get; }
-        string Description { get; }
-        bool IsStackable { get; }
-        bool IsClickable { get; }
-        void StackItem(Item itemToGive);
-        void ShowItemInfo();
-    }
+    public string Name { get; protected set; }
+    public ItemType Type { get; protected set; }
+    public ItemKind Kind { get; protected set; }
+    public Sprite Sprite { get; protected set; }
+    public int Quantity { get; protected set; }
+    public string Description { get; protected set; }
+    public bool IsStackable { get; protected set; }
+    public bool IsClickable { get; protected set; }
     
-    public enum ItemKind
-    {
-        Unassigned,
-        Equipment,
-        Miscellaneous,
-        Consumable,
-    }
+    /// <summary>
+    /// To implement stacking quantity of item
+    /// </summary>
+    /// <param name="itemToGive"></param>
+    public abstract void StackItem(Item itemToGive);
 
-    public enum ItemType
-    {
-        Unassigned = 0,
+    /// <summary>
+    /// To implement display item information e.g. Name & Description 
+    /// </summary>
+    public abstract void InteractItem();
+}
 
-        //Equipment
-        Sword = 1,
-        Breastplate,
+public interface IItemHandler
+{
+    string Name { get; }
+    ItemType Type { get; }
+    ItemKind Kind { get; }
+    int Quantity { get; }
+    string Description { get; }
+    bool IsStackable { get; }
+    bool IsClickable { get; }
+    void StackItem(Item itemToGive);
+    void InteractItem();
+}
 
-        //Misc
-        Stone = 300,
+public enum ItemKind
+{
+    Unassigned,
+    Equipment,
+    Miscellaneous,
+    Consumable,
+}
 
-        //Consumables
-        HealingPotion = 600,
-        ManaPotion,
-    }
+public enum ItemType
+{
+    Unassigned = 0,
+
+    //Equipment
+    Sword = 1,
+    Breastplate,
+
+    //Misc
+    Stone = 300,
+
+    //Consumables
+    HealingPotion = 600,
+    ManaPotion,
 }

@@ -16,5 +16,6 @@ MonoBehaviour:
   Type: 300
   Kind: 2
   Quantity: 1
-  Sprite: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 985d89c177895734c864d46ab75dea2d, type: 3}
   Description: Stone and Shield
+  DraggableItem: {fileID: 5022419917556302796, guid: a624a9f06afcc204392b349b14ada1bf, type: 3}

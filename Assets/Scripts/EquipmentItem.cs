@@ -1,28 +1,26 @@
 using UnityEngine;
 
-namespace GP2.Inventory
+
+[System.Serializable]
+public class EquipmentItem : Item
 {
-    [System.Serializable]
-    public class EquipmentItem : Item
+    public EquipmentItem(ItemBag itemBag) : base(itemBag)
     {
-        public EquipmentItem(ItemBag itemBag) : base(itemBag)
-        {
-            IsStackable = false;
-            IsClickable = true; 
-            Quantity = 1;
-        }
+        IsStackable = false;
+        IsClickable = true;
+    }
 
-        public override void StackItem(Item itemToGive)
+    public override void StackItem(Item itemToGive)
+    {
+        if (!IsStackable)
         {
-            if (!IsStackable)
-            {
-                Debug.Log($"{Name} cannot be stacked");
-            }
+            Debug.Log($"{Name} cannot be stacked");
         }
+    }
 
-        public override void ShowItemInfo()
-        {
-            Debug.Log($"Equipment Name: {Name} : {Description}");
-        }
+    public override void InteractItem()
+    {
+        Debug.Log($"{nameof(Name)} : {Name} " +
+                  $"{nameof(Description)} : {Description}");
     }
 }

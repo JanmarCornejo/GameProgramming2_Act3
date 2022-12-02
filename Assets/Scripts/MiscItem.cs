@@ -1,31 +1,28 @@
 using UnityEngine;
 
-namespace GP2.Inventory
+
+[System.Serializable]
+public class MiscItem : Item
 {
-    [System.Serializable]
-    public class MiscItem : Item
+    public MiscItem(ItemBag itemBag) : base(itemBag)
     {
-        public MiscItem(ItemBag itemBag) : base(itemBag)
-        {
-            IsStackable = false;
-            IsClickable = false;
-            Quantity = 1;
-        }
+        IsStackable = false;
+        IsClickable = false;
+    }
 
-        public override void StackItem(Item itemToGive)
+    public override void StackItem(Item itemToGive)
+    {
+        if (!IsStackable)
         {
-            if (!IsStackable)
-            {
-                Debug.Log($"{Name} cannot be stacked");
-            }
+            Debug.Log($"{Name} cannot be stacked");
         }
+    }
 
-        public override void ShowItemInfo()
+    public override void InteractItem()
+    {
+        if (!IsClickable)
         {
-            if (!IsClickable)
-            {
-                Debug.Log($"{Name} cannot be clicked");
-            }
+            Debug.Log($"{Name} cannot be clicked");
         }
     }
 }
