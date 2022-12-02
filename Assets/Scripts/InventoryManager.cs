@@ -19,7 +19,9 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private int _itemSlots = 16;
     
     [SerializeField] private DropConfirmationPanel _dropPanelPrefab;
+    [SerializeField] private Notification _notificationPrefab;
     [SerializeField] private InventoryGrid _grid;
+    [SerializeField] private NotificationPanel _notificationPanel;
     [SerializeField] private Canvas _sceneCanvas;
 
     private void Awake()
@@ -105,26 +107,17 @@ public class InventoryManager : MonoBehaviour
         _itemSlots++;
     }
 
+    public Notification ShowNotification(string msg)
+    {
+       var notif = Instantiate(_notificationPrefab, _sceneCanvas.transform, false);
+       _notificationPanel.AddNotification(notif, msg);
+       return notif;
+    }
+
     public DropConfirmationPanel CreateDropConfirmPanel() =>
         Instantiate(_dropPanelPrefab, _sceneCanvas.transform, false);
 
     //Below are debugging functions
-    private void DebugInitialSampleItems()
-    {
-        // foreach (var type in _itemDrops)
-        // {
-        //     var item = CreateItem(type);
-        //     //TODO check if inventory is full
-        //     _itemList.Add(item);
-        //     //Debug.Log($"{nameof(item.Name)}:{item.Name} " +
-        //               // $"{nameof(item.Type)}:{item.Type} " +
-        //               // $"{nameof(item.Kind)}:{item.Kind} " +
-        //               // $"{nameof(item.Quantity)}:{item.Quantity} " +
-        //               // $"{nameof(item.Description)}:{item.Description} " +
-        //               // $"{nameof(item.IsStackable)}:{item.IsStackable} " +
-        //               // $"{nameof(item.IsClickable)}:{item.IsClickable} ");
-        // }
-    }
 
     private void DebugStackItem()
     {

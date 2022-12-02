@@ -12,18 +12,19 @@ public class ConsumableItem : Item
 
     public override void StackItem(Item itemToGive)
     {
-        Debug.Log($"{nameof(Name)} : {Name} previous Quantity: {Quantity}");
         Quantity += itemToGive.Quantity;
-        Debug.Log($"{nameof(Name)} : new quantity: {Quantity}");
+        var msg = $"{nameof(Name)}: {Name} \n {nameof(Description)}: {Description} \n New {nameof(Quantity)}: {Quantity}";
+        Debug.Log(msg);
+        InventoryManager.Instance.ShowNotification(msg);
         InvokeOnUpdateQuantity();
     }
 
     public override void InteractItem()
     {
-        Debug.Log($"{nameof(Name)} : {Name} previous quantity: {Quantity}");
         Quantity -= 1;
-        Debug.Log($"{nameof(Name)} : {Name} consume 1 {nameof(Quantity)}");
-        Debug.Log($"{nameof(Name)} : {Name} new {nameof(Quantity)} : {Quantity}");
+        var msg = $"{nameof(Name)}: {Name} \n {nameof(Description)}: {Description} \n {nameof(Quantity)}: {Quantity}";
+        Debug.Log(msg);
+        InventoryManager.Instance.ShowNotification(msg);
         InvokeOnUpdateQuantity();
         if(Quantity <= 0)
             InvokeOnRemoveItem();

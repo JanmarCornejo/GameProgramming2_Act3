@@ -20,7 +20,8 @@ public class EquipmentItem : Item
 
     public override void InteractItem()
     {
-        Debug.Log($"{nameof(Name)} : {Name} " +
-                  $"{nameof(Description)} : {Description}");
+        var msg = $"{nameof(Name)}: {Name} \n {nameof(Description)}: {Description}";
+        Debug.Log(msg);
+        InventoryManager.Instance.ShowNotification(msg);
     }
 }
