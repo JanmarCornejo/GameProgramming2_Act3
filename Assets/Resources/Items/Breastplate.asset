@@ -16,6 +16,6 @@ MonoBehaviour:
   Type: 2
   Kind: 1
   Quantity: 1
-  Sprite: {fileID: 21300000, guid: cae86b32826cf6f498cc923bfb2d1e42, type: 3}
-  Description: Reincarnated as a Sword
+  Sprite: {fileID: 21300000, guid: 61460bc9b163a0346b6055849bd63fc8, type: 3}
+  Description: I am the bone of my sword
   DraggableItem: {fileID: 5022419917556302796, guid: a624a9f06afcc204392b349b14ada1bf, type: 3}
