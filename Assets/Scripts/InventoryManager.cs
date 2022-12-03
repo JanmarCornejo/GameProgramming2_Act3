@@ -19,6 +19,7 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private int _itemSlots = 16;
     private int _currentSlots;
     
+    //UI 
     [SerializeField] private DropConfirmationPanel _dropPanelPrefab;
     [SerializeField] private Notification _notificationPrefab;
     [SerializeField] private InventoryGrid _grid;
@@ -27,7 +28,10 @@ public class InventoryManager : MonoBehaviour
 
     private void Awake()
     {
-        Instance = this;
+        if(Instance == null)
+            Instance = this;
+        else
+            Destroy(this.gameObject);
 
         ItemBag[] itemBags = Resources.LoadAll<ItemBag>(_itemInfoPath);
         foreach (var itemBag in itemBags)
@@ -39,12 +43,6 @@ public class InventoryManager : MonoBehaviour
     private void OnDestroy()
     {
         Instance = null;
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        //DebugInitialSampleItems();
     }
 
     /// <summary>
@@ -87,11 +85,15 @@ public class InventoryManager : MonoBehaviour
     public InventoryGrid GetInventoryGrid() => _grid;
     private ItemBag GetItemInfo(ItemType type) => _itemsInfoDictionary[type];
 
+    /// <summary>
+    /// Add Item to list
+    /// </summary>
+    /// <param name="item">List from scriptable objects</param>
+    /// <returns></returns>
     public bool AddItemToList(Item item)
     {
         if (_currentSlots >= _itemSlots)
         {
-            //Debug.Log("Inventory is full");
             ShowNotification($"Inventory is Full");
             return false;
         }
@@ -115,6 +117,11 @@ public class InventoryManager : MonoBehaviour
         _currentSlots--;
     }
 
+    /// <summary>
+    /// Show Notification Popup 
+    /// </summary>
+    /// <param name="msg"></param>
+    /// <returns></returns>
     public Notification ShowNotification(string msg)
     {
        var notif = Instantiate(_notificationPrefab, _sceneCanvas.transform, false);
@@ -124,14 +131,4 @@ public class InventoryManager : MonoBehaviour
 
     public DropConfirmationPanel CreateDropConfirmPanel() =>
         Instantiate(_dropPanelPrefab, _sceneCanvas.transform, false);
-
-    //Below are debugging functions
-
-    private void DebugStackItem()
-    {
-        var potionBag = GetItemInfo(ItemType.HealingPotion);
-        var anotherHealingPotion = new ConsumableItem(potionBag);
-        var healingPotion = FindConsumeItem(anotherHealingPotion.Type);
-        healingPotion.StackItem(anotherHealingPotion);
-    }
 }
