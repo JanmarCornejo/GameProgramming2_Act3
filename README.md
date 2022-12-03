@@ -1,7 +1,12 @@
 <GAME PROG 2 - ACTIVITY 3>
 
-Geoffrey Mendoza
-Janmar Cornejo
+Contributors:
+
+- Geoffrey Mendoza
+
+- Janmar Cornejo
+
+ACTIVITY TO BE DONE:
 
 Create an Inventory System with UI.
 
