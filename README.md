@@ -9,29 +9,39 @@ Each Item block consumes 1 square.
 
 There are 3 Item types:
 
-Equipment
-cannot be stacked
-when double clicked will debug equipment name and description
-Misc
-cannot be stacked
-when double clicked will do nothing
-Consumable
-can be stacked
-when double clicked will debug name and description and be consumed
-Things you can do in the inventory system
+// Equipment
 
-Reorganize inventory by dragging and dropping items.
+- cannot be stacked
 
-Drag
+- when double clicked will debug equipment name and description
 
-drag will make a sprite go on top of the mouse cursor and follow it around until drag ends
-if drag ends outside the inventory, it becomes a drop
-if drag ends on top of an inventory slot, transfer inventory to that slot.
-Drop
+// Misc
 
-dropping provides a prompt if you want to drop item
-pressing cancel drop returns item back in inventory
-pressing drop removes item from inventory (as if it were consumed (including equipment))
+- cannot be stacked
+
+- when double clicked will do nothing
+
+// Consumable
+
+- can be stacked
+
+- when double clicked will debug name and description and be consumed
+
+// Things you can do in the inventory system
+
+- Reorganize inventory by dragging and dropping items.
+
+// Drag
+
+- drag will make a sprite go on top of the mouse cursor and follow it around until drag ends
+- if drag ends outside the inventory, it becomes a drop
+- if drag ends on top of an inventory slot, transfer inventory to that slot.
+
+// Drop
+
+- dropping provides a prompt if you want to drop item
+- pressing cancel drop returns item back in inventory
+- pressing drop removes item from inventory (as if it were consumed (including equipment))
  
 
  
