@@ -37,9 +37,9 @@ public class DebugController : MonoBehaviour
     private void Update()
     {
         // Debug only
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            InventoryManager.Instance.CreateItem(_itemDrop);
-        }
+        // if (Input.GetKeyDown(KeyCode.Space))
+        // {
+        //     InventoryManager.Instance.CreateItem(_itemDrop);
+        // }
     }
 }
