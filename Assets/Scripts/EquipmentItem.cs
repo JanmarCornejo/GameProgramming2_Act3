@@ -15,7 +15,7 @@ public class EquipmentItem : Item
         if (!IsStackable)
         {
             Debug.Log($"{Name} cannot be stacked");
-        }
+        }       
     }
 
     public override void InteractItem()
