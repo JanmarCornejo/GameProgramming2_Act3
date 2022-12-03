@@ -17,6 +17,7 @@ public class InventoryManager : MonoBehaviour
     private List<Item> _itemList = new List<Item>();
 
     [SerializeField] private int _itemSlots = 16;
+    private int _currentSlots;
     
     [SerializeField] private DropConfirmationPanel _dropPanelPrefab;
     [SerializeField] private Notification _notificationPrefab;
@@ -88,6 +89,13 @@ public class InventoryManager : MonoBehaviour
 
     public bool AddItemToList(Item item)
     {
+        if (_currentSlots >= _itemSlots)
+        {
+            //Debug.Log("Inventory is full");
+            ShowNotification($"Inventory is Full");
+            return false;
+        }
+
         var consumeItem = FindConsumeItem(item.Type);
         if (consumeItem != null)
         {
@@ -95,8 +103,8 @@ public class InventoryManager : MonoBehaviour
             return false;
         }
 
+        _currentSlots++;
         _itemList.Add(item);
-        _itemSlots--;
         item.OnRemoveItem += RemoveItem;
         return true;
     }
@@ -104,7 +112,7 @@ public class InventoryManager : MonoBehaviour
     private void RemoveItem(Item item)
     {
         _itemList.Remove(item);
-        _itemSlots++;
+        _currentSlots--;
     }
 
     public Notification ShowNotification(string msg)

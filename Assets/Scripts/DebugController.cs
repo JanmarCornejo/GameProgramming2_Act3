@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class DebugController : MonoBehaviour
 {
-    // [SerializeField] private ItemType _itemDrop;
     [SerializeField] private TMP_InputField _inputField;
     [SerializeField] private Button _createBtn;
 
@@ -33,12 +32,14 @@ public class DebugController : MonoBehaviour
         _inputField.text = string.Empty;
     }
 
+    [SerializeField] private ItemType _itemDrop;
+
     private void Update()
     {
         // Debug only
-        // if (Input.GetKeyDown(KeyCode.Space))
-        // {
-        //     InventoryManager.Instance.CreateItem(_itemDrop);
-        // }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            InventoryManager.Instance.CreateItem(_itemDrop);
+        }
     }
 }
