@@ -48,7 +48,7 @@ There are 3 Item types:
 - pressing cancel drop returns item back in inventory
 - pressing drop removes item from inventory (as if it were consumed (including equipment))
  
-
+  ![](https://github.com/LocalPizzaEmployee/GameProgramming2_Act3/blob/master/Documentation/inventory_system.gif)
  
 
 Database:
