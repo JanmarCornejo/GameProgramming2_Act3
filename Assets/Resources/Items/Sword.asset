@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78f0ff95c6be4e94994dcedddbc4cc40, type: 3}
   m_Name: Sword
   m_EditorClassIdentifier: 
-  ItemName: Sword
+  ItemName: Broad Sword
   Type: 1
   Kind: 1
   Quantity: 1

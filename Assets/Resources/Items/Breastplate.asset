@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78f0ff95c6be4e94994dcedddbc4cc40, type: 3}
   m_Name: Breastplate
   m_EditorClassIdentifier: 
-  ItemName: Breastplate
+  ItemName: Assault Cuirass
   Type: 2
   Kind: 1
   Quantity: 1
